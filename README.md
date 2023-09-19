@@ -37,60 +37,60 @@ In essence, this book serves as a beacon, guiding readers through the vast lands
 
 # [Brief Chapters]()
 
-Chapter 1: Concepts behind
+## Chapter 1: Concepts behind
 Microsoft Power Platform
 
 Let us provide a general overview of
 concepts behind Microsoft Power Platform, including low code, no code,
 democratize coding, and concurrency and explore the history of each one.
 
-Chapter 2: Introduction to
+## Chapter 2: Introduction to
 Microsoft Power Platform
 
 A general overview of Microsoft Power
 Platform, including its core components, objectives, and benefits.
 
-Chapter 3:  Understanding Microsoft Dataverse
+## Chapter 3:  Understanding Microsoft Dataverse
 
 Understanding how Power Platform
 interacts with various data sources and services like Microsoft Dataverse and
 Azure.
 
-Chapter 4:  Understanding Power Pages
+## Chapter 4:  Understanding Power Pages
 
 Exploring Power Apps Portals and how they
 can be utilized to create user-friendly interfaces for external users.
 
-Chapter 5:  Liquid language
+## Chapter 5:  Liquid language
 
 A general overview of Liquid, including
 its core components, objectives, and benefits.
 
-Chapter 6:  Components in Power Pages
+## Chapter 6:  Components in Power Pages
 
 A general overview of use of Components,
 including snippets, pages, custom web templates, custom page templates and we
 will see the objectives, and benefits.
 
-Chapter 7:  Simple how-to do’s
+## Chapter 7:  Simple how-to do’s
 
 A simple how to do in Power Apps Studio
 example like, add form, add page, manage permissions and other interesting
 topics.
 
-Chapter 8:  Demystifying forms in Power Pages
+## Chapter 8:  Demystifying forms in Power Pages
 
 A Demystifying form in Power Pages,
 including its components, objectives, and benefits.
 
-Chapter 9:  Advanced concepts in Power Pages
+## Chapter 9:  Advanced concepts in Power Pages
 
 A more advanced exploring topics around
 Power Pages example like, Portal Management, Web API in Power Pages, working with
 HTML, CSS, JavaScript code in Visual Studio Code and you will find a lot of
 more interesting topics.
 
-Chapter 10: Real-World Example:
+## Chapter 10: Real-World Example:
 "cantinhode.net" News & Articles Portal
 
 In this chapter we will create one
@@ -100,46 +100,46 @@ site choosing one template, create authorization and authentication, custom
 pages, implementing multi language, exploring the advance interface in Power
 Pages, make the integration of power pages sites between Visual Studio Code.
 
-Chapter 11: Combining Power
+## Chapter 11: Combining Power
 Platform Tools
 
 An in-depth examination of how to
 leverage the combined strength of Power Apps, Power Automate, Power BI, and
 Power Virtual Agents for holistic business solutions.
 
-Chapter 12: Security and
+## Chapter 12: Security and
 Compliance in Power Platform
 
 Covering the security and compliance
 aspects of Power Platform, including data privacy and governance.
 
-Chapter 13: Administration and
+## Chapter 13: Administration and
 Management of Power Platform
 
 Details on managing Power Platform,
 managing environments, upgrading, and troubleshooting.
 
-Chapter 14: Advanced Techniques in
+## Chapter 14: Advanced Techniques in
 Power Platform
 
 Exploring advanced features and
 techniques, such as creating complex flows in Power Automate and advanced data
 modeling in Power BI.
 
-Chapter 15: Real-world Case
+## Chapter 15: Real-world Case
 Studies of Power Platform
 
 Analyzing several real-world examples
 where businesses have successfully implemented and utilized Power Platform.
 
-Chapter 16: Future of Power
+## Chapter 16: Future of Power
 Platform
 
 Discussing the future directions of Power
 Platform, including potential new features and enhancements, and how it fits
 into Microsoft's broader strategic vision.
 
-Chapter 17: Preparing for Power
+## Chapter 17: Preparing for Power
 Platform Certification
 
 A guide to help prepares for Microsoft’s
