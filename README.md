@@ -19,3 +19,5 @@ As you dive into **"Mastering the Microsoft Power Pages: A Comprehensive Guide"*
 May this book serve as a guiding light on your journey to mastering the Microsoft Power Platform.
 
 **Dr. Pedro Martins, Solution Architect**
+
+![1695124570275](image/README/1695124570275.png)
