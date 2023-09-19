@@ -1,0 +1,35 @@
+{% include 'Portal Web API Wrapper' %}{% include 'Course Form Logic' %}
+<div data-ppid="74a28159-4fc5-d742-e1a8-6ca99223854e" class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; padding: 8px; margin: 0px; text-align: left; min-height: 100px;">
+  <div data-ppid="0b2783d8-a021-41db-fdaf-1e87e3aab44f" class="container" style="display: flex; flex-wrap: wrap;">
+    <div data-ppid="5f540cc6-ffba-687b-a0ee-0856b9e4cb55" class="col-md-12 columnBlockLayout course-form-header" style="word-break: break-word; flex-grow: 1; min-width: 300px; display: flex; flex-direction: column;">
+      <div class="back-container">
+        <a href="/admin-home" data-ppid="7b5c2b50-bda7-eab8-547a-740eacf1d181"><img src="/back-arrow.svg" alt="back arrow" data-ppid="3c0c5723-2c00-d0bb-6a34-afdce42906a1" class="back-arrow" style="max-width: 100%;" /><span data-ppid="43ed621a-6f99-af0a-a089-949468568329"> Back to my Courses </span></a>
+      </div>
+      <h2 data-ppid="849aca98-c374-a20b-4fd7-24e4147649ee">Create new course</h2>
+      <h5 data-ppid="ef84d9b8-ea45-c918-142f-82847bcca0ba">Course details</h5>
+    </div>
+  </div>
+</div>
+<div data-ppid="95a6ded7-80a7-bc04-f1d8-5c255adef20a" class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; margin: 0px; text-align: left; min-height: 374px; padding: 8px;">
+  <div data-ppid="4bec4377-50be-6457-de6f-241dcb1d34c0" class="container course-form-container" style="display: flex; flex-wrap: wrap;"><div data-ppid="f00a8cdf-fdd4-5684-f379-e29eceb5e91c" class="col-md-12 columnBlockLayout" style="word-break: break-word; flex-grow: 1; display: flex; flex-direction: column; min-width: 300px; padding: 16px;">{% entityform name: 'ASP Create Course' %}</div></div>
+</div>
+<div data-ppid="0cd425b0-e873-ace0-55b7-6c80ba9d2be8" class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; margin: 0px; text-align: left; min-height: 374px; padding: 8px;">
+  <div data-ppid="aa8f86d9-2c0e-aea8-8b85-6b0ca7c5c0a2" class="container btn-container" style="display: flex; flex-wrap: wrap;">
+    <div data-ppid="b222405f-febf-324a-f62d-9b56fd5c91f4" class="col-md-6 columnBlockLayout" style="word-break: break-word; flex-grow: 1; display: flex; flex-direction: column; min-width: 300px;"><button id="cancelButton1" data-toggle="modal" data-target="#discardModal1" data-ppid="0535a264-9a88-2b33-a39b-b47ecdd7c1a1" class="button1 btn-secondary" style="margin-left: auto; margin-right: 0;">Discard</button></div>
+    <button id="createButton1" data-ppid="24a5c1c1-dd1d-1b27-3734-fda4a52c8c9b" class="button1 btn-secondary" style="margin-right: 0; height: 37px; margin-top: 65px; width: 182px;">{{ snippets.Create }}</button>
+  </div>
+</div>
+<!-- START MODAL -->
+<div id="discardModal1" role="dialog" aria-labelledby="discardModalLabel" aria-hidden="true" class="modal fade">
+  <div role="document" class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius: 16px;">
+      <div class="modal-header">
+        <h5 data-ppid="19e012e9-bc78-d05e-22e2-b1655b9253c9" class="modal-title">Discard changes?</h5>
+        <button type="button" data-dismiss="modal" aria-label="Close" data-ppid="e5d1745a-0777-79ad-a7a5-8e2a61032a70" class="close"><span aria-hidden="true" data-ppid="13e21d87-019a-23c1-738f-1ffcf1f5497c">×</span></button>
+      </div>
+      <div data-ppid="5efbb96b-f34d-e357-7e24-981c1b383ba9" class="modal-body">Would you like to discard any changes made?</div>
+      <div class="modal-footer"><button id="confirmDiscard1" type="button" data-ppid="cb9bfff2-bcd3-3e15-2b22-dfd75982c1fd" class="btn btn-primary">Discard</button></div>
+    </div>
+  </div>
+</div>
+<!-- END MODAL -->

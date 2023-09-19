@@ -1,0 +1,37 @@
+<div class="col-sm-6 registration-card-col" id="card-{{registration.msdynce_registrationid}}">
+    <div class="card course-card flex-card">
+        <div class="row card-body">
+                <div class="card-flex-left">
+                    <div class="course-days">
+                        {{dayvalues}}
+                    </div>
+                <div class="title-container">
+                    <p class="card-text-large"> {{registration.coursename}} </p>
+                </div>
+                <div class="sub-flex-content">
+                    <div class="sub-left">
+                    <img id="imgfull-{{registration.parent}}-{{registration.msdynce_registrationid}}" data-attendee="{{registration.msdynce_attendeename.id}}" src="{{ settings['Card/ChildFiller']}}" alt="{{registration.fullname}} profile photo">
+                    <p class="card-text-xsmall text-center">{{registration.fullname}}</p>
+                    </div>
+                    <div class="sub-right">
+                        <p class="card-text-medium card-time"> {{registration.coursestart | date: 't'}} to {{registration.courseend | date: 't'}} </p>
+                        <p class="card-text-xsmall card-day"> {{registration.coursestart | date: 'MMMM dd'}} - {{registration.courseend | date: 'MMMM dd'}} </p>
+
+                        <div class="course-type">
+                            {{typeValues}} 
+                        </div>
+                        <button type="button" id="unregisterButton-{{registration.msdynce_registrationid}}" class="btn-link" data-toggle="modal" data-target="#unregisterModal" onclick="showUnregisterModal('{{registration.msdynce_registrationid}}')">Cancel registration</button>
+        
+                    </div>
+                </div>
+                </div>
+                <div class="card-flex-right" id="div{{registration.msdynce_registrationid}}" data-regid="{{registration.msdynce_registrationid}}" data-courseid="{{registration.course}}">                            
+                    <div class="mobile-right">
+                        <img id="img-{{registration.msdynce_attendeename}}" data-attendee="{{registration.msdynce_attendeename.id}}" src="{{ settings['Card/ChildFiller']}}" alt="{{registration.fullname}} profile photo">
+                        <p class="card-text-xsmall text-center">{{registration.fullname}}</p>
+                        <button type="button" class="btn-link" data-toggle="modal" data-target="#unregisterModal" onclick="showUnregisterModal('{{registration.msdynce_registrationid}}')">Cancel registration</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

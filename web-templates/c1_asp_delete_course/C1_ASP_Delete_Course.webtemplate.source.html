@@ -1,0 +1,5 @@
+{% if request.params['id'] | xml_escape %}
+{% assign courseid = request.params['id'] | xml_escape %}
+{% else %}
+{% assign courseid = "" %}
+{% endif %}

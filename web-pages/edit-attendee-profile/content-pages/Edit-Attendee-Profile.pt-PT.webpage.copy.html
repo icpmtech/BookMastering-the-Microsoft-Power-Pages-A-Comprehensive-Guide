@@ -1,0 +1,61 @@
+<script>
+  $(document).ready(function () {
+    if (typeof Page_Validators == 'undefined') return;
+    // Create new validator
+    var newValidator = document.createElement('span');
+    newValidator.style.display = 'none';
+    newValidator.id = 'birthdateValidator';
+    newValidator.controltovalidate = 'birthdate';
+    newValidator.errormessage = '';
+    newValidator.validationGroup = ''; // Set this if you have set ValidationGroup on the form
+    newValidator.initialvalue = '';
+    newValidator.evaluationfunction = function () {
+      var birthdateValue = moment(document.getElementById('birthdate').value);
+      if (moment(birthdateValue).isAfter(moment())) {
+        $('#dateError').css({
+          display: 'block',
+        });
+        return false; // return false mean apply validation
+      } else {
+        return true;
+      } // return true mean successful
+    };
+    // Add the new validator to the page validators array:
+    Page_Validators.push(newValidator);
+    // Wire-up the click event handler of the validation summary link
+    $("a[href='#birthdate_label']").on('click', function () {
+      scrollToAndFocus('birthdate_label', 'Birthdate');
+    });
+
+    $('.form-custom-actions').css({
+      display: 'block',
+      margin: '0px 0px 15px 50%',
+      width: '448px',
+    });
+
+    $('#cancelEditAttendeeButton').click(function () {
+      window.location.reload();
+      window.top.location.reload();
+    });
+
+    $('#deleteAttendeeButton').click(function () {
+      deleteChildProfile();
+      window.location.reload();
+      window.top.location.reload();
+    });
+  });
+</script>
+{% include 'Portal Web API Wrapper' %}
+<div class='row sectionBlockLayout' style='display: flex; flex-wrap: wrap; padding: 8px; margin: 0px; text-align: left; min-height: 100px;'>
+  <div class='container' style='display: flex; flex-wrap: wrap;'>
+    <div class='col-md-12 columnBlockLayout' style='flex-grow: 1; min-width: 300px; display: flex; flex-direction: column; margin-bottom: 0px'>
+      {% entityform name: 'Edit Attendee' -%}
+      <button style='width: 210px; margin-left: 50%; display: flex; justify-content: center; align-items: center; gap: 5px;' class='btn button2' id='cancelEditAttendeeButton'>{{ snippets.Cancel }}</button>
+      <button style='width: 210px; margin-left: 50%; display: flex; justify-content: center; align-items: center; gap: 5px; margin-top:12px' class='btn button1' id='deleteAttendeeButton'>{{ snippets.Delete }}</button>
+      {{- snippets['Attendee Required Field'] }}
+    </div>
+    <div>
+      <a id='dateError' style='display:none' href='#birthdate_label'>{{ snippets['Error/Future DOB'] }}</a>
+    </div>
+  </div>
+</div>

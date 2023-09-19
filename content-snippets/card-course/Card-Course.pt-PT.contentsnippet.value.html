@@ -1,0 +1,33 @@
+<div data-component-theme="portalThemeColor5" class="card" id="card-{{course.msdynce_course_id}}">
+  <div id="courseimage-{{course.msdynce_course_id}}" data-courseid="{{course.msdynce_courseid}}" class="course-card-img">
+    <div class="card-img-top gradient-image placeholder"></div>
+  </div>
+  <div class="course-days">
+    {{dayvalues}}
+  </div>
+  <div class="card-body">
+    <h3 class="card-text-large title">{{ course.msdynce_coursename }}</h3>
+    <p class="card-text-medium no-margin"> {{ course.msdynce_coursestartdateandtime | date: 't'}}<span> - </span>{{ course.msdynce_courseenddateandtime | date: 't'}}</p>
+    <p class="card-text startdate"> {{ course.msdynce_coursestartdateandtime | date: 'MMMM dd'}}<span> - </span>{{ course.msdynce_courseenddateandtime | date: 'MMMM dd'}}</p>
+    <p class="card-text-xsmall"><strong>Instructor: </strong>{{ course.msdynce_instructor | default: 'Pending' }} </p>
+    <p courseid="{{course.msdynce_course_id}}" class="card-text-xxsmall description">{{course.msdynce_coursedescription | truncate: 150}}
+    </p>
+    <p>
+      <a class="learn-more" aria-label="Learn more about {{ course.msdynce_coursename }} course." href="{{ sitemarkers['View Course Details'].url }}?id={{course.msdynce_courseid}}">Learn more</a>
+    </p>
+    <p></p>
+    <div class="course-category">
+      <p data-component-theme="portalThemeColor3">{{course.msdynce_coursecategory.Label}}</p>
+    </div>
+    <div class="course-formats">{{typeValues}}</div>
+    <div class="bottom-right">
+      <p class="card-text-xsmall">{{ course.msdynce_registerationmaxcapacity | minus: registered }}<span> spots left / </span>{{ course.msdynce_registerationmaxcapacity }}</p>
+      {% if user %}
+      <a href="{{ sitemarkers['View Course Details'].url }}?id={{course.msdynce_courseid}}" class="button1" aria-label="Register for the {{course.msdynce_coursename}} course.">Register</a>
+      {% else %}
+      <button data-toggle="modal" data-target="#signInPopup" class="button1" aria-label="Sign in to register for the {{course.msdynce_coursename}} course.">Sign in to Register</button>
+      {% endif %}
+      <p class="card-text-xxsmall deadline">Registration deadline: {{ course.msdynce_registerationdeadline | date: 'MMMM dd'}}</p>
+    </div>
+  </div>
+</div>

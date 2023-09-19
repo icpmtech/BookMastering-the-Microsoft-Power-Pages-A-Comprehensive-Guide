@@ -1,0 +1,35 @@
+<div class="row sectionBlockLayout text-left" style="min-height: auto; padding: 8px;">
+    <div class="container" style="display: flex; flex-wrap: wrap;">
+      <div class="col-md-12 columnBlockLayout" style="padding: 16px; margin: 60px 0px; min-height: 200px;">
+        {% fetchxml News %}
+
+        <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+          <entity name="cra3a_news">
+            <attribute name="cra3a_newsid" />
+            <attribute name="cra3a_name" />
+            <attribute name="createdon" />
+            <order attribute="cra3a_name" descending="false" />
+          </entity>
+        </fetch>
+        {% endfetchxml %}
+        <h1>List of the News using Liquid Query Code</h1>
+        <table id="news">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>      
+            </tr>
+          </thead>
+        <tbody>
+            {% for result in News.results.entities %}
+            <tr>
+              <td>{{ result.cra3a_newsid }} </td>
+              <td>{{ result.cra3a_name }} </td>     
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

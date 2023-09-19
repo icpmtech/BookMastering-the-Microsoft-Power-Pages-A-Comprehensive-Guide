@@ -1,0 +1,34 @@
+<div id="categoryfilters" class="left-filters">
+  <h2 aria-label="Select course category">Category</h2>
+  <!-- <ul id="categoryList"> -->
+    <!-- <li class="categoryListItem"> -->
+      {% if request.params['category'] | xml_escape %}
+        <label class="categoryLabel">
+      {% else %}
+        <label class="categoryLabel categorySelected">
+      {% endif %}
+        <input type="radio" class="radioCategory" id="categoryAll" name="Category" value="">All
+      </label>
+    <!-- </li> -->
+    {% for category in coursecategories.results.entities %}
+      {% if category.objecttypecode == entityCode %}
+        {% assign valueString = category.attributevalue | string %}
+        {% if request.params['category'] contains valueString %}
+          <!-- <li class="categoryListItem"> -->
+            <label class="categoryLabel categorySelected">
+              <input type="radio" class="radioCategory" id="category{{category.displayorder}}" name="Category" value="{{category.attributevalue}}" checked="">{{category.value}}
+            </label>
+          <!-- </li> -->
+        {% else %}
+            <!-- <li class="categoryListItem"> -->
+              <label class="categoryLabel">
+                <input type="radio" class="radioCategory" id="category{{category.displayorder}}" name="Category" value="{{category.attributevalue}}">{{category.value}}
+              </label>
+            <!-- </li> -->
+        {% endif %} 
+      {% endif %}
+    {% endfor %}
+  <!-- </ul> -->
+  <br>
+  <button id="applyCategoryDesktop" class="btn btn-default">Apply</button>
+</div>

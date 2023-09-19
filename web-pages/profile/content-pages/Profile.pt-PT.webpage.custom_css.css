@@ -1,0 +1,119 @@
+body{
+    background:#fff;
+}
+form#content_form {
+    margin-top: 30px;
+}
+form .form-control {
+    border: 1px solid #CCCCCC;
+}
+.xrm-attribute-value p {
+    font-size: 14px;
+    margin: 0;
+}
+.row .col-md-8 > fieldset {
+    margin-top: 20px;
+}
+#ContentContainer_MainContent_MainContent_ContentBottom_MarketingOptionsPanel .col-sm-12 {
+    display: flex;
+}
+#ContentContainer_MainContent_MainContent_ContentBottom_MarketingOptionsPanel .checkbox {
+    margin: 0 10px;
+}
+#ContentContainer_MainContent_MainContent_ContentBottom_MarketingOptionsPanel legend {
+    font-size: 16px;
+    font-weight: 600;
+}
+span.checkmark {
+    left: 0;
+    top: 3px;
+}
+.alert.alert-info.clearfix {
+    margin-top: 10px;
+    background: #FAE1C8;
+}
+.alert a.btn.btn-info.btn-xs {
+    background: transparent;
+    border: none;
+    color: #BF7560;
+    text-decoration: underline;
+    font-weight: 700;
+}
+.fa-envelope-o:before {
+    content: none;
+}
+.page-heading {
+    display: none;
+}
+.xrm-editable-adx_weblinkset.xrm-entity {
+    display: none;
+}
+footer {
+    display: none;
+}
+
+/* START PROFILE STYLE */
+div#ProfileFormView {
+  background-color: transparent;
+  border: none;
+}
+.col-md-4 .well {
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid #CCCCCC;
+}
+.col-md-4 .well img {
+  border-radius: 10px;
+}
+.panel.panel-default.nav-profile .panel-heading {
+  border-radius: 12px 12px 0 0;
+  background: #BF7560;
+  color: #fff;
+}
+.panel.panel-default.nav-profile {
+  border:2px solid #BF7560;
+  border-radius: 13px;
+}
+.panel>.list-group:last-child .list-group-item:last-child, .panel>.panel-collapse>.list-group:last-child .list-group-item:last-child {
+    border-radius: 0 0 18px 18px;
+}
+#ProfileFormView td.clearfix.cell.text.form-control-cell {
+    padding: 0 15px 15px 0;
+}
+body[data-sitemap-state="/profile/:/"] .page-header {
+    border-bottom: 1px solid #CCCCCC;
+}
+body[data-sitemap-state="/profile/:/"] .list-group-item 
+{
+background-color:transparent;
+}
+body[data-sitemap-state="/profile/:/"] .weblinks .list-group-item:first-child
+{
+    border-radius:10px 10px 0px 0px;
+}
+body[data-sitemap-state="/profile/:/"] .weblinks .list-group-item:last-child
+{
+    border-radius:0px 0px 10px 10px;
+}
+body[data-sitemap-state="/profile/:/"] .fa-exclamation-circle:before
+{
+    color:#BF7560;
+}
+body[data-sitemap-state="/profile/:/"] legend
+{
+    border:0px;
+}
+
+#adx_publicprofilecopy, #websiteurl, #jobtitle, 
+#nickname, #telephone1, #adx_organizationname, #mobilephone, #emailaddress1,
+#lastname, #firstname
+{
+    border:1px solid #CCCCCC;
+    border-radius:10px;
+}
+#adx_preferredlanguageid_name
+{
+    border:1px solid #CCCCCC;
+    border-radius:10px 0px 0px 10px;
+}
+/* END PROFILE*/

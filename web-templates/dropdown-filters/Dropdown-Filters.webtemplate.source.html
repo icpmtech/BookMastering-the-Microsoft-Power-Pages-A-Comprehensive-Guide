@@ -1,0 +1,243 @@
+<!-- Get Grades option set values -->
+{% fetchxml coursegrades %}
+<fetch distinct='true'>
+  <entity name='stringmap'>
+    <attribute name='attributevalue' />
+    <attribute name='attributename' />
+    <attribute name='objecttypecode' />
+    <attribute name='displayorder' />
+    <attribute name='value' />
+    <filter>
+      <condition attribute='attributename' operator='eq' value='msdynce_coursegradelevel' />
+      <condition attribute='langid' operator='eq' value='{{website.adx_website_language}}' />
+    </filter>
+    <order attribute='objecttypecode' descending='true' />
+    <order attribute='displayorder' />
+  </entity>
+</fetch>
+{% endfetchxml %}
+<!-- Get Course Types option set values -->
+{% fetchxml coursetypes %}
+<fetch distinct='true'>
+  <entity name='stringmap'>
+    <attribute name='attributevalue' />
+    <attribute name='displayorder' />
+    <attribute name='value' />
+    <attribute name='attributename' />
+    <attribute name='objecttypecode' />
+    <filter>
+      <condition attribute='attributename' operator='eq' value='msdynce_coursetype' />
+      <condition attribute='langid' operator='eq' value='{{website.adx_website_language}}' />
+    </filter>
+    <order attribute='objecttypecode' descending='true' />
+    <order attribute='displayorder' />
+  </entity>
+</fetch>
+{% endfetchxml %}
+<!-- Get Course categories option set values -->
+{% fetchxml coursecategories %}
+<fetch distinct='true'>
+  <entity name='stringmap'>
+    <attribute name='attributevalue' />
+    <attribute name='displayorder' />
+    <attribute name='value' />
+    <attribute name='attributename' />
+    <attribute name='objecttypecode' />
+    <filter>
+      <condition attribute='attributename' operator='eq' value='msdynce_coursecategory' />
+      <condition attribute='langid' operator='eq' value='{{website.adx_website_language}}' />
+    </filter>
+    <order attribute='objecttypecode' descending='true' />
+    <order attribute='displayorder' />
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% if coursegrades.results and coursegrades.results.entities and coursegrades.results.entities.size > 0 %}
+  {% assign entityCode = coursegrades.results.entities[0].objecttypecode %}
+{% endif %}
+
+{% assign fall = snippets['Filter/Season/Fall'] %}
+{% assign winter = snippets['Filter/Season/Winter'] %}
+{% assign spring = snippets['Filter/Season/Spring'] %}
+{% assign summer = snippets['Filter/Season/Summer'] %}
+{% assign today = now | date: '%M' | integer %}
+{% assign currentSeason = '' %}
+
+{% if today >= 9 and today <= 11 %}
+  {% assign currentSeason = winter %}
+{% elsif today == 12 or today <= 2 %}
+  {% assign currentSeason = spring %}
+{% elsif today >= 3 and today <= 5 %}
+  {% assign currentSeason = summer %}
+{% elsif today >= 6 and today <= 8 %}
+  {% assign currentSeason = fall %}
+{% endif %}
+
+{% if request.params['level'] | xml_escape %}
+  {% assign gradeFilters = request.params.level | xml_escape | split: ',' %}
+{% endif %}
+
+{% if request.params['type'] | xml_escape %}
+  {% assign typeFilters = request.params.type | xml_escape | split: ',' %}
+{% endif %}
+
+{% assign selectedCategoryId = request.params.category | xml_escape | integer %}
+{% assign selectedCategory = coursecategories.results.entities | where: 'attributevalue', selectedCategoryId | first %}
+
+{% assign selectedSeason = request.params.season | xml_escape %}
+
+{% assign selectedLevelId = request.params.level | xml_escape | integer %}
+{% assign selectedLevel = coursegrades.results.entities | where: 'attributevalue', selectedLevelId | first %}
+
+{% assign selectedTypeId = request.params.type | xml_escape | integer %}
+{% assign selectedType = coursetypes.results.entities | where: 'attributevalue', selectedTypeId | first %}
+
+<div class='row filters'>
+  <div class='col-lg-3 col-sm-3 col-md-3 search-container'>
+    <div class='input-group search-input'>
+      {% if request.params['search'] | xml_escape %}
+        <input
+          type='text'
+          id='txtsearch'
+          placeholder='{{snippets['Filter/SearchEvent']}}'
+          aria-label='{{snippets['Filter/SearchEvent']}}'
+          value='{{request.params['search'] | xml_escape}}'
+        >
+      {% else %}
+        <input
+          type='text'
+          id='txtsearch'
+          placeholder='{{snippets['Filter/SearchEvent']}}'
+          aria-label='{{snippets['Filter/SearchEvent']}}'
+        >
+      {% endif %}
+      <div class='input-group-btn'>
+        <button id='btnSearch' class='btn search-input-button' aria-label='Search'>
+          <span class='fa fa-search form-control-feedback'></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class='col-lg-9 col-sm-9 col-md-9'>
+    <div class='catalog-dropdown-filters'>
+      <label>
+        Category
+        <select name='Category' title='{{ selectedCategory.value | default: 'Any' }}' class='course-selector'>
+          <option
+            value=''
+            {% unless selectedCategory %}
+              selected
+            {% endunless %}
+          >
+            Any
+          </option>
+          {% for category in coursecategories.results.entities %}
+            <option
+              value='{{category.attributevalue}}'
+              {% if selectedCategory == category %}
+                selected
+              {% endif %}
+            >
+              {{ category.value }}
+            </option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <label>
+        Season
+        <select name='Season' title='{{ selectedSeason | default: 'Any' }}' class='course-selector'>
+          <option
+            value=''
+            {% unless selectedSeason %}
+              selected
+            {% endunless %}
+          >
+            Any
+          </option>
+          <option
+            value='{{fall}}'
+            {% if selectedSeason == fall %}
+              selected
+            {% endif %}
+          >
+            {{ fall }}
+          </option>
+          <option
+            value='{{winter}}'
+            {% if selectedSeason == winter %}
+              selected
+            {% endif %}
+          >
+            {{ winter }}
+          </option>
+          <option
+            value='{{spring}}'
+            {% if selectedSeason == spring %}
+              selected
+            {% endif %}
+          >
+            {{ spring }}
+          </option>
+          <option
+            value='{{summer}}'
+            {% if selectedSeason == summer %}
+              selected
+            {% endif %}
+          >
+            {{ summer }}
+          </option>
+        </select>
+      </label>
+
+      <label>
+        Level
+        <select name='Grade Level' title='{{ selectedLevel.value | default: 'Any' }}' class='course-selector'>
+          <option
+            value=''
+            {% unless selectedLevel %}
+              selected
+            {% endunless %}
+          >
+            Any
+          </option>
+          {% for grade in coursegrades.results.entities %}
+            <option
+              value='{{grade.attributevalue}}'
+              {% if selectedLevel == grade %}
+                selected
+              {% endif %}
+            >
+              {{ grade.value }}
+            </option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <label>
+        Type
+        <select name='Course Type' title='{{ selectedType.value | default: 'Any' }}' class='course-selector'>
+          <option
+            value=''
+            {% unless selectedType %}
+              selected
+            {% endunless %}
+          >
+            Any
+          </option>
+          {% for type in coursetypes.results.entities %}
+            <option
+              value='{{type.attributevalue}}'
+              {% if selectedType == type %}
+                selected
+              {% endif %}
+            >
+              {{ type.value }}
+            </option>
+          {% endfor %}
+        </select>
+      </label>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{% if request.params['id'] | xml_escape %}
+{% assign courseid = request.params['id'] | xml_escape %}
+{% endif %}
+
+{% if request.IsPreview == false %}
+{%endif%}
+
+{% fetchxml currentcourse %}
+<fetch>
+  <entity name="msdynce_course">
+    <attribute name="msdynce_coursename" alias="coursename" />
+    <filter>
+      <condition attribute="msdynce_courseid" operator="eq" uitype="msdynce_course" value="{{courseid}}" />
+    </filter>
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+<!-- START CREATED MODAL -->
+{% editable snippets 'Modal/CourseCreate' type: 'html' %}
+<!-- END MODAL -->
+
+<!-- START EDITED MODAL -->
+{% editable snippets 'Modal/CourseEdit' type: 'html' %}
+<!-- END MODAL -->
+
+<!-- START CANCELLED MODAL -->
+{% editable snippets 'Modal/CourseCancel' type: 'html' %}
+<!-- END MODAL -->

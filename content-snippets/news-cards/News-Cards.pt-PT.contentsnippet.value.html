@@ -1,0 +1,66 @@
+{% fetchxml locationsQuery %}
+  <fetch mapping='logical' output-format='xml-platform'>
+    <entity name='cra3a_news'>
+      <attribute name='cra3a_name' />
+      <attribute name='cra3a_title' />
+    </entity>
+  </fetch>
+{% endfetchxml %}
+
+<h2>{{ name | default: 'Cards' }}</h2>
+
+{% assign place_count = count | integer %}
+{% assign column_count = columns | integer %}
+
+<ul style="list-style:none" class="grid">
+  {% for loc in locationsQuery.results.entities limit: place_count %}
+    <li class="col-md-{{ 12 | divided_by: column_count }}">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>{{ loc.cra3a_name }}</h3>
+        </div>
+        <div class="panel-body">
+          <p>{{ loc.cra3a_name }}</p>
+        </div>
+        {% if footer == 'true' and loc.cra3a_name %}
+          <div class="panel-footer">
+            <a href="{{loc.cra3a_name}}">Learn more about {{ loc.cra3a_name }}</a>
+          </div>
+        {% endif %}
+      </div>
+    </li>
+  {% endfor %}
+</ul>
+{% manifest %}
+  {
+  "type": "Functional",
+              "displayName": "Cards",
+              "description": "Custom card component using the table 'Place' as the data source",
+              "tables": [
+                "cra3a_news"
+              ],
+              "params": [
+                {
+                  "id": "name",
+                  "displayName": "Title",
+                  "description": "Let's give it a title"
+                },
+                {
+                  "id": "count",
+                  "displayName": "Count",
+                  "description": "No. of items"
+                },
+                {
+                  "id": "columns",
+                  "displayName": "# of Columns",
+                  "description": "less than 12"
+                },
+                {
+                  "id": "footer",
+                  "displayName": "Footer",
+                  "description": "Show the footer of the cards"
+                }
+              ]
+          }
+{% endmanifest %}
+

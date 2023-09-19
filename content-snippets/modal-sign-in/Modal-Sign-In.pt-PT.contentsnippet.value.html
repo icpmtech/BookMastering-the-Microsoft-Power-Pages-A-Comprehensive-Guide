@@ -1,0 +1,19 @@
+<div class="modal fade" id="signInPopup" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content" style="border-radius:16px;">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signInModalLabel">Sign in / Sign up to register for an event</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Please sign in or sign up to register yourself or your children to an event.
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="window.location.href='/SignIn{{returnUrl}}'" class="button2">Sign In</a></button>
+          <button type="button" onclick="window.location.href='/Account/Login/Register{{returnUrl}}'" class="button1">Sign Up</a></button>
+        </div>
+      </div>
+    </div>
+  </div>

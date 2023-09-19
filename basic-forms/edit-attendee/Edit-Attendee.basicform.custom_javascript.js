@@ -1,0 +1,38 @@
+$(function () {    
+    $("div.form-custom-actions").append(`<button type='button' id='btnSaveValidate' name='btnSaveValidate' class='btn button1' 
+onclick="javascript: if (typeof entityFormClientValidate === 'function') {
+        if (entityFormClientValidate()) {
+            if (typeof Page_ClientValidate === 'function') {
+                if (Page_ClientValidate('')) {
+                    clearIsDirty();
+                    disableButtons();
+                    this.value = 'Processing...';
+                    if (typeof editChildProfile === 'function') {
+                        editChildProfile();
+                        clearIsDirty();       
+                        this.disabled = false;    
+                    }
+                }
+            } else {
+                clearIsDirty();
+                disableButtons();
+                this.value = 'Processing...';
+            }
+        } else {
+            return false;
+        }
+    } else {
+        if (typeof Page_ClientValidate === 'function') {
+            if (Page_ClientValidate('')) {
+                clearIsDirty();
+                disableButtons();
+                this.value = 'Processing...';
+            }
+        } else {
+            clearIsDirty();
+            disableButtons();
+            this.value = 'Processing...';
+        }
+    };"
+>Save</button>`);
+});

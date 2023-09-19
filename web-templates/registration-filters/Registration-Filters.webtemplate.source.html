@@ -1,0 +1,128 @@
+{% assign fall = snippets['Filter/Season/Fall'] %}
+{% assign winter = snippets['Filter/Season/Winter'] %}
+{% assign spring = snippets['Filter/Season/Spring'] %}
+{% assign summer = snippets['Filter/Season/Summer'] %}
+{% assign currentSeason = '' %}
+
+{% assign today = now | date: "%M" | integer %}
+{% if today >= 9 and today <= 11 %}
+{% assign currentSeason = winter %}
+{% elsif today == 12 or today <= 2 %}
+{% assign currentSeason = spring %}
+{% elsif today >= 3 and today <= 5 %}
+{% assign currentSeason = summer %}
+{% elsif today >= 6 and today <= 8 %}
+{% assign currentSeason = fall %}
+{% endif %}
+
+{% fetchxml attendees %}
+<fetch distinct="false" mapping="logical" output-format="xml-platform" version="1.0">
+  <entity name="contact" >
+    <attribute name="fullname" />
+    <attribute name="contactid" />
+    <attribute name="firstname" />
+    <attribute name="lastname" />
+    <attribute name="parentcustomerid" /> 
+    <filter>
+      <condition attribute="statecode" operator="eq" value="0" />
+      <condition attribute="parentcustomerid" operator="eq" value="{{user.contactid}}" />
+    </filter>
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% if attendees.results and attendees.results.entities %}
+  {% assign attendeeResults = attendees.results.entities %}
+  {% assign totalCount = attendees.results.total_record_count %}
+{% endif %}
+
+<!-- START SEASON MODAL -->
+<div class="modal fade filter-modal" id="seasonPopupCatalog" tabindex="-1" role="dialog" aria-labelledby="seasonPopupCatalogLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog" role="document">
+      <div class="modal-content" style="border-radius:16px;">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title" id="seasonPopupCatalogLabel">{{snippets['Filter/Season']}}</h5>
+            <p class="modal-title card-text-xxsmall">{{snippets['Filter/SelectSeason']}}</p>
+            </div>
+        </div>
+        <div class="modal-body">
+            {% if request.params['season'] == fall %}
+            <label class="filterLabel filterSelected" >
+              <input type="radio" class="radioSeasonMobile" name="SeasonMobile" value="{{fall}}" checked>{{fall}}
+              {% else %}
+              <label class="filterLabel">
+              <input type="radio" class="radioSeasonMobile" name="SeasonMobile" value="{{fall}}">{{fall}}
+            {% endif %}
+            <p class="card-text-xxsmall">{{snippets['Filter/Season/FallMonths']}}</p>
+            </label>
+              <br/>            
+            {% if request.params['season'] == winter %}
+            <label class="filterLabel filterSelected" >
+            <input type="radio" class="radioSeasonMobile" name="SeasonMobile" value="{{winter}}" checked>{{winter}}
+            {% else %}
+            <label class="filterLabel" >
+            <input type="radio" class="radioSeasonMobile" name="SeasonMobile" value="{{winter}}">{{winter}}
+            {% endif %}
+            <p class="card-text-xxsmall">{{snippets['Filter/Season/WinterMonths']}}</p>
+            </label>
+              <br/>            
+            {% if request.params['season'] == spring %}
+            <label class="filterLabel filterSelected" >
+            <input type="radio" class="radioSeasonMobile" name="SeasonMobile" value="{{spring}}" checked>{{spring}}
+            {% else %}
+            <label class="filterLabel">
+            <input type="radio" class="radioSeasonMobile" name="SeasonMobile" value="{{spring}}">{{spring}}
+            {% endif %}
+            <p class="card-text-xxsmall">{{snippets['Filter/Season/SpringMonths']}}</p>
+            </label> 
+              <br/>            
+            {% if request.params['season'] == summer %}
+            <label class="filterLabel filterSelected" >
+            <input type="radio" class="radioSeasonMobile" name="SeasonMobile" value="{{summer}}" checked>{{summer}}
+            {% else %}
+            <label class="filterLabel">
+            <input type="radio" class="radioSeasonMobile" name="SeasonMobile" value="{{summer}}">{{summer}}
+            {% endif %}
+            <p class="card-text-xxsmall">{{snippets['Filter/Season/SummerMonths']}}</p>
+            </label>        
+        </div>
+        <div class="modal-footer">
+          <button data-dismiss="modal" class="btn btn-primary" id="applySeasonCatalog">{{snippets['Filter/Apply']}}</button>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- END SEASON MODAL -->
+
+<!-- START ATTENDEE MODAL -->
+  <div class="modal fade filter-modal" id="attendeePopup" tabindex="-1" role="dialog" aria-labelledby="attendeePopupLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog" role="document">
+      <div class="modal-content" style="border-radius:16px;">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title" id="attendeePopupLabel">{{snippets['Filter/Attendee']}}</h5>
+            <p class="modal-title card-text-xxsmall">{{snippets['Filter/SelectAttendee']}}</p>
+            </div>
+          </div>
+        <div class="modal-body">
+        {% if user and user.contactid %}
+          <br/>
+          <label class='filterLabel'>
+            <input type='checkbox' class='checkAttendeeMobile' name='attendeeMobile' value='{{user.contactid}}'>{{snippets['Filter/Me/Myself']}}
+          </label>
+        {% endif %}
+        {% for attendee in attendeeResults %}
+            <br/>
+            <label class='filterLabel'>
+                <input type='checkbox' class='checkAttendeeMobile' name='attendeeMobile' value='{{attendee.contactid}}'>{{attendee.fullname}}
+            </label>
+        {% endfor %}
+        </div>
+        <div class="modal-footer">
+          <button data-dismiss="modal" class="btn btn-primary" id="applyAttendee">{{snippets['Filter/Apply']}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END ATTENDEE MODAL -->

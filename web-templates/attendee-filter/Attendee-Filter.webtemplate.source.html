@@ -1,0 +1,36 @@
+{% fetchxml attendees %}
+<fetch distinct="false" mapping="logical" output-format="xml-platform" version="1.0">
+  <entity name="contact" >
+    <attribute name="fullname" />
+    <attribute name="contactid" />
+    <attribute name="firstname" />
+    <attribute name="lastname" />
+    <attribute name="parentcustomerid" /> 
+    <filter>
+      <condition attribute="statecode" operator="eq" value="0" />
+      <condition attribute="parentcustomerid" operator="eq" value="{{user.contactid}}" />
+    </filter>
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% if attendees.results and attendees.results.entities %}
+  {% assign attendeeResults = attendees.results.entities %}
+  {% assign totalCount = attendees.results.total_record_count %}
+
+
+  {% for attendee in attendeeResults %}
+    <li>
+      <span class="child-my-registration-card">
+          <label class="checkbox-container-vertical">
+              <input type="checkbox" id="child{{attendee.contactid}}" class="checkAttendee" name="child" value="{{attendee.contactid}}">
+              <span class="checkmark-registration"></span>
+              <label for="child{{attendee.contactid}}"></label>
+              <img id="img{{attendee.contactid}}" data-contact="{{attendee.contactid}}" src="/child-placeholder.svg" alt="{{attendee.fullname}} profile photo">
+              <p class="card-text-xsmall text-center">{{attendee.fullname}}</p>
+          </label>
+      </span>
+    </li>
+  {% endfor %}
+
+{% endif %}
