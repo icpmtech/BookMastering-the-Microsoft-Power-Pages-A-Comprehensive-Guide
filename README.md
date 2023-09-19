@@ -119,28 +119,24 @@ Management of Power Platform
 Details on managing Power Platform,
 managing environments, upgrading, and troubleshooting.
 
-## Chapter 14: Advanced Techniques in
-Power Platform
+## Chapter 14: Advanced Techniques in Power Platform
 
 Exploring advanced features and
 techniques, such as creating complex flows in Power Automate and advanced data
 modeling in Power BI.
 
-## Chapter 15: Real-world Case
-Studies of Power Platform
+## Chapter 15: Real-world Case Studies of Power Platform
 
 Analyzing several real-world examples
 where businesses have successfully implemented and utilized Power Platform.
 
-## Chapter 16: Future of Power
-Platform
+## Chapter 16: Future of Power Platform
 
 Discussing the future directions of Power
 Platform, including potential new features and enhancements, and how it fits
 into Microsoft's broader strategic vision.
 
-## Chapter 17: Preparing for Power
-Platform Certification
+## Chapter 17: Preparing for Power Platform Certification
 
 A guide to help prepares for Microsoft’s
 Power Platform certifications, along with tips and strategies to ace the exams.
