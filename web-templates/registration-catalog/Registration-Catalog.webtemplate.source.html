@@ -1,0 +1,186 @@
+{% block main %}
+
+{% if request.params['page'] | xml_escape %}
+{% assign page = request.params['page'] | xml_escape | integer | default: 1 %}
+{% else %}
+{% assign page = 1 %}
+{% endif %}
+
+{% assign previousPage = page | minus: 1 %}
+{% assign nextPage = page | plus: 1 %}
+
+{% assign cardsPerPageValue = settings['ASP/Pagination/CardsPerPage'] | default: 20 %}
+{% assign cardsPerPage = cardsPerPageValue | times: 1.0 %}
+{% assign cardCounter = 1 %}
+
+{% assign seasonFilter = request.params['season'] | xml_escape | default: currentSeason %}
+
+{% if request.params['attendees'] | xml_escape %}
+{% assign attendeeFilters = request.params['attendees'] | xml_escape | split: ',' %}
+{% endif %}
+
+{% fetchxml registrations %}
+<fetch distinct="false" mapping="logical" output-format="xml-platform" version="1.0" count="{{ cardsPerPage }}" returntotalrecordcount="true" page="{{ page }}">
+    <entity name="msdynce_registration">
+        <attribute name="msdynce_registrationid"/>
+        <attribute name="msdynce_attendeename"/>
+        <attribute name="msdynce_name"/>
+        <attribute name="msdynce_coursestartdate"/>
+        <attribute name="msdynce_courseenddate"/>
+        <attribute name="createdon"/>
+        <attribute name="msdynce_parent"/>
+        <order descending="false" attribute="msdynce_name"/>
+        <filter type="and">
+            <condition attribute="statecode" value="0" operator="eq"/>
+        </filter>
+        <filter type="or">
+            <condition attribute="msdynce_parent" value="{{user.id}}" operator="eq"/>
+            <condition attribute="msdynce_attendeename" value="{{user.id}}" operator="eq"/>
+        </filter>
+        <link-entity name="contact" from="contactid" to="msdynce_attendeename" visible="false" link-type="outer">
+          <attribute name="fullname" alias="fullname" />
+          <attribute name="contactid" alias="parent" />
+        </link-entity>
+        <link-entity name="msdynce_course" from="msdynce_courseid" to="msdynce_courseid" visible="false" link-type="outer">
+          <attribute name="msdynce_courseid" alias="course" />
+          <attribute name="msdynce_coursename" alias="coursename" />
+          <attribute name="msdynce_coursestartdateandtime" alias="coursestart" />
+          <attribute name="msdynce_courseenddateandtime" alias="courseend" />
+          <attribute name="msdynce_coursedays" alias="coursedays" />
+          <attribute name="msdynce_coursetype" alias="coursetype" />
+          <attribute name="msdynce_instructor" /> 
+          <attribute name="msdynce_coursedescription" />     
+        </link-entity>
+        {% if request.params['search'] | xml_escape %}
+          {% assign searchTxt = request.params['search'] | xml_escape %}
+          <filter type="or" >
+            <condition entityname="msdynce_course" attribute="msdynce_coursename" operator="like" value="%{{searchTxt}}%" />
+            <condition entityname="msdynce_course" attribute="msdynce_instructor" operator="like" value="%{{searchTxt}}%" />
+            <condition entityname="msdynce_course" attribute="msdynce_coursedescription" operator="like" value="%{{searchTxt}}%" />
+          </filter>
+        {% endif %}
+
+        {% if request.params['attendees'] | xml_escape %}
+          <filter type="or">
+          {% for v in attendeeFilters %}
+          <condition attribute="msdynce_attendeename" operator="eq" value="{{v}}" />
+          {% endfor %}
+          </filter>
+        {% endif %}
+    </entity>
+</fetch>
+{% endfetchxml %}
+
+<!-- Get Course Types option set values -->
+{% fetchxml coursetypes %}
+<fetch distinct="true">
+  <entity name="stringmap">
+    <attribute name="attributevalue" />
+    <attribute name="displayorder" />
+    <attribute name="value" />
+    <attribute name="attributename" />
+    <attribute name="objecttypecode" />
+    <filter>
+      <condition attribute="attributename" operator="eq" value="msdynce_coursetype" />
+      <condition attribute="langid" operator="eq" value="{{website.adx_website_language}}" />
+    </filter>
+    <order attribute="objecttypecode" descending="true" />
+    <order attribute="displayorder" />
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% assign seasonFilter = request.params['season'] | xml_escape | default: currentSeason %}
+
+{% if registrations.results and registrations.results.entities %}
+    {% assign registrationResults = registrations.results.entities %}
+    {% assign filteredIndices = "" %}
+    {% assign index = 0 %}
+    {% unless request.params['search'] | xml_escape %}
+    {% for registration in registrationResults %}
+      {% assign enddatemonth = registration.msdynce_courseenddateandtime | date: "MM" | integer%}
+      {% assign strIndex = index | string %}
+      {% case seasonFilter  %}
+        {% when fall %}
+          {% if enddatemonth >= 9 and enddatemonth <= 11 %}
+            {% if filteredIndices.size > 0 %}
+              {% assign filteredIndices = filteredIndices | append: "," %}
+            {% endif %}
+            {% assign filteredIndices = filteredIndices | append: strIndex %}
+          {% endif %}
+        {% when winter %}
+          {% if enddatemonth == 12 or enddatemonth <= 2 %}
+            {% if filteredIndices.size > 0 %}
+              {% assign filteredIndices = filteredIndices | append: "," %}
+            {% endif %}
+            {% assign filteredIndices = filteredIndices | append: strIndex  %}
+          {% endif %}
+        {% when spring %}
+          {% if enddatemonth >= 3 and enddatemonth <= 5 %}
+            {% if filteredIndices.size > 0 %}
+              {% assign filteredIndices = filteredIndices | append: "," %}
+            {% endif %}  
+            {% assign filteredIndices = filteredIndices | append: strIndex  %}
+          {% endif %}
+        {% when summer %}
+          {% if enddatemonth >= 6 and enddatemonth <= 8 %}
+            {% if filteredIndices.size > 0 %}
+              {% assign filteredIndices = filteredIndices | append: "," %}
+            {% endif %}
+            {% assign filteredIndices = filteredIndices | append: strIndex %}
+          {% endif %}
+      {% endcase %}
+      {% assign index = index | plus: 1 %}
+    {% endfor %}
+    {% endunless %}
+    {% if filteredIndices.size > 0 %}
+      {% assign filteredIndices = filteredIndices | split: "," %}
+      {% assign totalCount = filteredIndices.size %}
+      {% assign pages = totalCount | decimal | divided_by: cardsPerPage | ceil %}
+
+      {% for i in filteredIndices %}
+        {% assign index = i | integer %}
+        {% assign registration = registrationResults[index] %}
+        <!-- Course Days -->
+        {% assign dayvalues = '' %}
+
+        {% if request.IsPreview != true %}
+          {% if registration.coursedays %}
+            {% for day in registration.coursedays %}
+                {% assign dayvalues = dayvalues | append:'<p>'| append:day.label| append:'</p>' %}
+            {% endfor %}
+          {% endif %}  
+        {% endif %}
+        <!-- END - Course Days -->
+
+        <!-- Course Types -->
+        {% assign typeValues = '' %}
+
+        {% if request.IsPreview != true %}
+            {% if registration.coursetype %}
+            {% for type in registration.coursetype %}
+                {% if forloop.index == 2 %}
+                {% assign typeValues = typeValues | append:'<span class="separator"> | </span>' %} 
+                {% endif %}
+                {% if type.value == 441790000 %}
+                {% assign typeValues = typeValues | append: '<img class="type-image" src="/format-icon.svg" alt="in-person icon">' | append:'<span>'| append:type.label| append:'</span>' %}  
+                {% else %}
+                {% assign typeValues = typeValues | append: '<img class="type-image" src="/virtual.svg" alt="Virtual course icon">' | append:'<span>'| append:type.label| append:'</span>' %}  
+                {% endif %}
+            {% endfor %}
+            {% endif %}  
+        {% endif %}
+        <!-- END - Course Types -->
+
+        {% editable snippets 'Card/Registrations' type: 'html' %}  
+
+      {% endfor %}
+
+      {% include 'Custom Pagination' %}
+    {% else %}
+      <h2>{{ snippets["NoRegistrationsFound"] }}</h2>
+    {% endif %}
+  {% else %}
+      <h2>{{ snippets["NoRegistrationsFound"] }}</h2>
+  {% endif %}
+{% endblock %}

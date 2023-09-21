@@ -1,0 +1,35 @@
+- adx_name: Knowledge Base
+  adx_sitemarkerid: 8822cd87-c13d-ee11-bdf4-000d3adcc96a
+- adx_name: View Course Details
+  adx_pageid: 446ac58d-c13d-ee11-bdf4-000d3adcc96a
+  adx_sitemarkerid: 8922cd87-c13d-ee11-bdf4-000d3adcc96a
+- adx_name: C1 Home
+  adx_pageid: 3e6ac58d-c13d-ee11-bdf4-000d3adcc96a
+  adx_sitemarkerid: 8a22cd87-c13d-ee11-bdf4-000d3adcc96a
+- adx_name: Home
+  adx_pageid: 5a6ac58d-c13d-ee11-bdf4-000d3adcc96a
+  adx_sitemarkerid: 8b22cd87-c13d-ee11-bdf4-000d3adcc96a
+- adx_name: Knowledge Base Search Results
+  adx_sitemarkerid: 8c22cd87-c13d-ee11-bdf4-000d3adcc96a
+- adx_name: Search
+  adx_pageid: 406ac58d-c13d-ee11-bdf4-000d3adcc96a
+  adx_sitemarkerid: 8d22cd87-c13d-ee11-bdf4-000d3adcc96a
+- adx_name: Event Feedback
+  adx_sitemarkerid: 8e22cd87-c13d-ee11-bdf4-000d3adcc96a
+- adx_name: Access Denied
+  adx_pageid: 386ac58d-c13d-ee11-bdf4-000d3adcc96a
+  adx_sitemarkerid: 8f22cd87-c13d-ee11-bdf4-000d3adcc96a
+- adx_name: Poll Archives
+  adx_sitemarkerid: 9022cd87-c13d-ee11-bdf4-000d3adcc96a
+- adx_name: Registration Success
+  adx_pageid: 456ac58d-c13d-ee11-bdf4-000d3adcc96a
+  adx_sitemarkerid: 9122cd87-c13d-ee11-bdf4-000d3adcc96a
+- adx_name: Attendee Information
+  adx_pageid: 436ac58d-c13d-ee11-bdf4-000d3adcc96a
+  adx_sitemarkerid: 9222cd87-c13d-ee11-bdf4-000d3adcc96a
+- adx_name: Profile
+  adx_pageid: 546ac58d-c13d-ee11-bdf4-000d3adcc96a
+  adx_sitemarkerid: 9322cd87-c13d-ee11-bdf4-000d3adcc96a
+- adx_name: Page Not Found
+  adx_pageid: 3b6ac58d-c13d-ee11-bdf4-000d3adcc96a
+  adx_sitemarkerid: 9422cd87-c13d-ee11-bdf4-000d3adcc96a

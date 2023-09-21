@@ -1,0 +1,87 @@
+<script>
+  $( document ).ready(function() {
+    {% if request.params['id'] | xml_escape %}
+      {% assign courseid = request.params['id'] | xml_escape %}
+    {% endif %}
+
+    {% fetchxml courseselected %}
+    <fetch>
+      <entity name="msdynce_course">
+        <attribute name="msdynce_entityimage" />
+        <attribute name="msdynce_entityimage_file_name" />
+        <attribute name="msdynce_entityimage_file_type" />
+        <filter>
+          <condition attribute="msdynce_courseid" operator="eq" value="{{courseid}}" />
+        </filter>
+      </entity>
+    </fetch>
+    {% endfetchxml %}
+
+    {% if courseselected.results and courseselected.results.entities and courseselected.results.entities[0].msdynce_entityimage %}
+      getImagePCF = function () {
+        const file = {
+            name: '{{courseselected.results.entities[0].msdynce_entityimage_file_name}}',
+            url: ""
+        }
+        return file
+      }
+    {% endif %}
+  });
+</script>
+
+{% include 'Portal Web API Wrapper' -%} {%- include 'Course Form Logic' %}
+<div class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; padding: 8px; margin: 0px; text-align: left; min-height: 100px;">
+  <div class="container" style="display: flex; flex-wrap: wrap;">
+    <div class="col-md-12 columnBlockLayout course-form-header" style="flex-grow: 1; min-width: 300px; display: flex; flex-direction: column;">
+      <div class="back-container">
+        <a href="/admin-home">
+          <img src="/back-arrow.svg" alt="back arrow" class="back-arrow" />
+          Back to my courses
+        </a>
+      </div>
+      <h2>Edit course</h2>
+      <h4>Course details</h4>
+    </div>
+  </div>
+</div>
+<div class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; margin: 0px; text-align: left; min-height: 374px; padding: 8px;">
+  <div class="container course-form-container" style="display: flex; flex-wrap: wrap;">
+    <div class="col-md-12 columnBlockLayout" style="flex-grow: 1; display: flex; flex-direction: column; min-width: 300px; padding: 16px;">{% entityform name: 'ASP Edit Form' %}</div>
+  </div>
+</div>
+<div class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; margin: 0px; text-align: left; min-height: 374px; padding: 8px;">
+  <div class="container btn-container" style="display: flex; flex-wrap: wrap;">
+    <div class="col-md-6 columnBlockLayout" style="flex-grow: 1; display: flex; flex-direction: column; min-width: 300px;"><button type="button" data-toggle="modal" data-target="#cancelCourseModal" onclick="showDeleteModal()" class="btn btn-secondary" style="margin-left: auto; margin-right: 0;">Cancel Course</button></div>
+    <button id="updateCourseButton" class="submit-btn btn btn-primary" style="margin-right: 0; height: 36px; margin-top: 65px; width: 182px;">{{ snippets.Update }}</button>
+  </div>
+</div>
+<!-- START BUTTONS SECTION -->
+
+<!-- END BUTTONS SECTION -->
+
+<!-- START DELETE COURSE MODAL -->
+<div class="modal fade" id="cancelCourseModal" tabindex="-1" role="dialog" aria-labelledby="cancelCourseModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-radius:16px;">
+      <div class="modal-header">
+        <h5 class="modal-title" style="font-weight:bold" id="cancelCourseModalLabel">Cancel course?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-text">Cancelling this course permanently removes all information attached to it. Cancel?</p>
+        <div id="cancel-form">
+          <!-- {% entityform name: 'Delete Course' %} -->
+          <iframe width="100%" height="330" id="delete-wrapper" frameborder="0" allowfullscreen=""></iframe>
+        </div>
+      </div>
+      <!--
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Cancel course</button>
+        </div>
+      -->
+    </div>
+  </div>
+</div>
+<!-- END DELETE COURSE MODAL -->

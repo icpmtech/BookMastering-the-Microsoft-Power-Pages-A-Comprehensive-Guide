@@ -1,0 +1,36 @@
+{% include 'Portal Web API Wrapper' %}
+<div class='row sectionBlockLayout' style='display: flex; flex-wrap: wrap; padding: 8px; margin: 0px; text-align: left; min-height: 100px;'>
+  <div class='container' style='display: flex; flex-wrap: wrap;'>
+    <div class='col-md-12 columnBlockLayout page-header' style='flex-direction: column; flex-grow: 1; min-width: 300px; display: flex;'><h2>My Attendees</h2></div>
+  </div>
+</div>
+<div class='row sectionBlockLayout' style='display: flex; flex-wrap: wrap; padding: 8px; margin: 0px;'>
+  <div class='container'>
+    <div id='attendees-container' class='col-md-12 columnBlockLayout' style='flex-grow: 1; display: flex; flex-direction: column; min-width: 300px;'>
+      <div class='col-md-1 child-card add-new'>
+        <!-- <button aria-label="add attendee button" id="addAttendeeButton" data-toggle="modal" data-target="#addAttendeeModal">+</button> -->
+        <button aria-label='Add Attendee' id='updateDetails'>+</button>
+        <p>Add New</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add attendee modal -->
+<dialog id='favDialog' class='modal-content nativeModal'>
+  <div class='modal-header'><h2 class='modal-title'>Add attendee information</h2></div>
+  <form method='dialog'><iframe frameborder='0' width='100%' height='600' id='add-child-wrapper' src='/add-attendee' allowfullscreen=''></iframe><button value='cancel' class='modalCloser'>Close Dialog</button></form>
+</dialog>
+<!--
+  <p>
+    <button aria-label="Add Attendee Button" id="updateDetails">Add Attendee</button>
+  </p>
+-->
+<output></output>
+<!-- @end Add attendee modal -->
+<!-- Edit attendee modal -->
+<dialog id='editDialog' class='modal-content nativeModal'>
+  <div class='modal-header'><h2 class='modal-title'>Edit attendee information</h2></div>
+  <form method='dialog'><iframe frameborder='0' width='100%' height='600' id='edit-child-wrapper' name='edit-child-wrapper' src='https://www.bing.com' allowfullscreen=''></iframe><button value='cancel' class='modalCloser'>Close Dialog</button></form>
+</dialog>
+<output></output>
+<!-- @end Edit attendee modal -->

@@ -1,0 +1,13 @@
+body{
+    background-color:transparent;
+}
+div#EntityFormPanel {
+    background-color: #fff;
+}
+div.navbar {display: none;}
+.crmEntityFormView td .control .form-control {
+    background-color: #F2F2F2;
+}
+.crmEntityFormView .cell textarea, .crmEntityFormView td .control textarea.form-control {
+    height: 100px;
+}

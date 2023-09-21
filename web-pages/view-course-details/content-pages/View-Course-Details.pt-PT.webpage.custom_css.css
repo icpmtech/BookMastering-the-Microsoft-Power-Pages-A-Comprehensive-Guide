@@ -1,0 +1,15 @@
+img.disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+p.disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+img.disabled+p {
+    cursor: default;
+}
+#description
+{word-wrap: break-word;}

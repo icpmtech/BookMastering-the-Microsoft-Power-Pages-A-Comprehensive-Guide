@@ -1,0 +1,16 @@
+.msos-option-selected
+{
+    background-color:#DAECED;
+}
+.msos-selection-container
+{
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.msos-selected-items li:last-child{
+    border-radius:0px 0px 10px 10px;
+}
+.msos-input-container .msos-input {
+    height: 0px
+}

@@ -1,0 +1,26 @@
+{% include 'Portal Web API Wrapper' %}
+<div class="row sectionBlockLayout" style="display: flex; flex-wrap: wrap; padding: 8px; margin: 0px; text-align: left; min-height: 40px;">
+  <div class="container" style="display: flex; flex-wrap: wrap;">
+    <div class="col-md-12 columnBlockLayout back-container" style="flex-grow: 1; min-width: 300px; display: flex; flex-direction: column;">
+      <a href="/"><img src="/back-arrow.svg" alt="back arrow" class="back-arrow" style="max-width: 100%;">
+        <span>Back to events catalog</span>
+      </a>
+      {% include 'View Course Details' %}
+    </div>
+  </div>
+</div>
+
+<!-- START MODAL -->
+  <div class="modal fade" id="addAttendeeModal1" tabindex="-1" role="dialog" aria-labelledby="addAttendeeModal1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h2 class="modal-title">Add attendee information</h2>
+              </div>
+              <div class="modal-body">
+                  <iframe width="100%" height="650" id="add-child-wrapper" src="/add-attendee" frameborder="0" allowfullscreen=""></iframe>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- END MODAL -->

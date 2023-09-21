@@ -1,0 +1,15 @@
+div.navbar {
+    display: none;
+}
+input#UpdateButton {
+    display: none;
+}
+button.deactivate-link.btn-default.btn {
+    width: 100%;
+}
+div#EntityFormPanel {
+    background-color: #fff;
+}
+ .form-custom-actions {
+    display: flex;
+  }

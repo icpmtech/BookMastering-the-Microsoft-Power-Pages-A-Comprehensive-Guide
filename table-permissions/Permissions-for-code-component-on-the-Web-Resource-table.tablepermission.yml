@@ -1,0 +1,14 @@
+adx_append: false
+adx_appendto: false
+adx_create: false
+adx_delete: false
+adx_entitylogicalname: webresource
+adx_entityname: Permissions for code component on the Web Resource table
+adx_entitypermission_webrole:
+- 696ac58d-c13d-ee11-bdf4-000d3adcc96a
+- 6a6ac58d-c13d-ee11-bdf4-000d3adcc96a
+- 6c6ac58d-c13d-ee11-bdf4-000d3adcc96a
+adx_entitypermissionid: 3c22cd87-c13d-ee11-bdf4-000d3adcc96a
+adx_read: true
+adx_scope: 756150000
+adx_write: false

@@ -1,0 +1,24 @@
+<!-- Get Course categories option set values -->
+{% fetchxml coursecategories %}
+<fetch distinct="true" >
+  <entity name="stringmap" >
+    <attribute name="attributevalue" />
+    <attribute name="displayorder" />
+    <attribute name="value" />
+    <attribute name="attributename" />
+    <attribute name="objecttypecode" />
+    <filter>
+      <condition attribute="attributename" operator="eq" value="msdynce_coursecategory" />
+      <condition attribute="langid" operator="eq" value="{{website.adx_website_language}}" />
+    </filter>
+    <order attribute="objecttypecode" descending="true" />
+    <order attribute="displayorder" />
+  </entity>
+</fetch>
+{% endfetchxml %}
+
+{% if coursecategories.results and coursecategories.results.entities and coursecategories.results.entities.size > 0 %}
+{% assign entityCode = coursecategories.results.entities[0].objecttypecode %}
+{% endif %}
+
+{% editable snippets 'Filter/Category Filter' type: 'html' %}

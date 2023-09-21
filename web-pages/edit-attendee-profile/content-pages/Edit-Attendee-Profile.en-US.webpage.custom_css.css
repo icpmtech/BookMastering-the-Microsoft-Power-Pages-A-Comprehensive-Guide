@@ -1,0 +1,14 @@
+div.navbar {display: none;}
+
+input#InsertButton {display: none;}
+
+.form-control{
+    background-color: #F2F2F2;
+}
+
+input#birthdate_datepicker_description {
+    border-radius: 10px 0 0 10px;
+}
+.input-append.input-group.datetimepicker {
+    width: 100%;
+}
