@@ -1,8 +1,0 @@
-adx_allcolumnpermissions:
-- 746610000
-- 746610001
-- 746610002
-adx_columnpermissionprofile_webrole: []
-adx_columnpermissionprofileid: 22038dc9-e247-ee11-be6e-000d3adcc96a
-adx_profilename: News
-adx_tablename: cra3a_news
