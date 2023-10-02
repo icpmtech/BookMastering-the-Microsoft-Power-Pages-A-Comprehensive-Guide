@@ -137,3 +137,9 @@ into Microsoft's broader strategic vision.
 
 A guide to help prepares for Microsoft’s
 Power Platform certifications, along with tips and strategies to ace the exams.
+
+# Articles Samples
+
+## Custom Forms 
+
+In this sample we can seehow to create a Custom Form and use an Web API toachieve the Upadate and create entity in Dataverse table entity.
