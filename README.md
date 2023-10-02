@@ -140,6 +140,8 @@ Power Platform certifications, along with tips and strategies to ace the exams.
 
 # Articles Samples
 
-## Custom Forms 
+## Create a Custom Form and Use Web API
 
 In this sample we can seehow to create a Custom Form and use an Web API toachieve the Upadate and create entity in Dataverse table entity.
+
+See the full article in [https://cantinhode.net/blogs/community-cantinho-de-net/build-custom-html-forms-in-power-pages](https://cantinhode.net/blogs/community-cantinho-de-net/build-custom-html-forms-in-power-pages)
